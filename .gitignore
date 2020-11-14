@@ -36,6 +36,7 @@ npm-debug.log
 yarn-error.log
 firebase/
 android/app/google-services.json
+android/app/debug.keystore
 
 # BUCK
 buck-out/

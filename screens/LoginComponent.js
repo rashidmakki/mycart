@@ -7,7 +7,6 @@ import {
 import { SocialIcon } from 'react-native-elements';
 import {  SafeAreaView } from 'react-native-safe-area-context';
 
-
 const LoginScreen=(props)=>{
 	return(
 		
@@ -23,16 +22,6 @@ const LoginScreen=(props)=>{
 		}}
 		onPress={props.signIn}
 		/>
-		<SocialIcon
-		title='Sign In With Facebook'
-		button
-		type='facebook'
-		iconType="font-awesome"
-		iconSize={30}
-		style={{
-			width:300
-		}}
-		/>
 		</SafeAreaView>
 		);
 }
@@ -47,3 +36,58 @@ const styles=StyleSheet.create({
 	}
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

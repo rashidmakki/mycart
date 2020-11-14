@@ -14,7 +14,7 @@ const Home=({navigation})=>{
     <Header
     statusBarProps={{ barStyle: 'light-content' }}
     barStyle="light-content" // or directly
-    leftComponent={{ icon: 'menu', color: '#fff',onPress:()=>navigation.toggleDrawer() }}
+    leftComponent={{ icon: 'menu', color: '#fff',onPress:()=>navigation.toggleDrawer(),size:40}}
     centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
     containerStyle={{
       backgroundColor: '#1976d2',

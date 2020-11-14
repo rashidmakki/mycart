@@ -17,7 +17,7 @@ import { SafeAreaProvider,SafeAreaView} from 'react-native-safe-area-context';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const AppStack=createStackNavigator();
 
-const App=({props}) => {
+const App=(props) => {
   const [isFirstLaunch,setIsFirstLaunch]=React.useState(null);
   useEffect(()=>{
 

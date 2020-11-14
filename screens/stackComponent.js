@@ -1,4 +1,5 @@
 import React,{useEffect} from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   ScrollView,
@@ -9,24 +10,21 @@ import {
 } from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './LoginComponent';
-import MainNavigator from './MainComponent';
-import {
+import auth from '@react-native-firebase/auth';
+import MainNavigator from './MainComponent';import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-community/google-signin';
 import _ from 'lodash';
+import {SignIn} from '../redux/user/userAction';
 
 const Stack=createStackNavigator();
 
 
 class LoginHomeStack extends React.Component{
-	constructor(){
-		super();
-		this.state={
-    		currentUser:{},
-    		isUserLoggedIn:false
-    	}
-	  }
+	constructor(props){
+		super(props);
+  }
   
 	  componentDidMount() {
 	  	GoogleSignin.configure({
@@ -37,13 +35,14 @@ class LoginHomeStack extends React.Component{
      });
 
 	  }
-	  signIn =async ()=>{
+	  signIn =async (props)=>{
+      const {SignIn}=this.props;
+      console.log(this.props);
 	  	try {
 	  		await GoogleSignin.hasPlayServices();
 	  		const userInfo = await GoogleSignin.signIn();
 	  		if(userInfo!==undefined){
-	  		this.setState({currentUser:userInfo});
-	  		this.setState({isUserLoggedIn:true});
+	  		SignIn({...userInfo});
 	  	  }
 	  	} catch (error) {
 	  		if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -57,32 +56,31 @@ class LoginHomeStack extends React.Component{
         Alert.alert('Play Services Not Available',error.message)
     } else {
         // some other error happened
-        Alert.alert('There is some problem ',error.message)
+        Alert.alert('There is some problem ',error.message);
     }
 
 }
+
+
 }
-  signOut = async () => {
+  signOut=async ()=>{
 	try {
 			await GoogleSignin.revokeAccess();
 			await GoogleSignin.signOut();
-      this.setState({currentUser:{}}) // Remember to remove the user from your app's state as well
-    } catch (error) {
-  	console.error(error);
+     // Remember to remove the user from your app's state as well
+    } catch(error){
+  	 Alert.alert('Can not SignOut',error.message);
     }
-   };
-   componentWillUnmount(){
-   	 this.setState({currentUser:{}});
-   	 this.setState({isUserLoggedIn:false});
    }
+   
        render(){
-       	const {currentUser}=this.state;
-       	const {isUserLoggedIn}=this.state;
-			return(
+       	const {isUserLoggedIn}=this.props.user;
+        console.log('isUserLoggedIn',this.props);
+			return(  
 				<View style={styles.View}>
 				{
 				 (isUserLoggedIn)?
-					<MainNavigator currentUserName={currentUser} />
+					<MainNavigator/>
                     :
 				    <LoginScreen signIn={this.signIn} />
 				}
@@ -91,9 +89,17 @@ class LoginHomeStack extends React.Component{
        }
 }
 
+const mapStateToProps=state=>({
+  user:state.user
+});
+
+const mapDispatchToProps=dispatch=>({
+  SignIn:(user)=>dispatch(SignIn(user))
+});
+
 const styles=StyleSheet.create({
 	View:{
 		flex:1
 	}
 });
-export default LoginHomeStack;
+export default connect(mapStateToProps,mapDispatchToProps)(LoginHomeStack);
