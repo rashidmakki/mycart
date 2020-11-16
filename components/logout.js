@@ -1,22 +1,49 @@
 import React from 'react';
 import {
   View,
-  Text,
-  Button
+  Text
 } from 'react-native';
+import { connect } from 'react-redux';
+import  {SafeAreaView } from 'react-native-safe-area-context';
+import { Header } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {signOutStart} from '../redux/user/user.actions';
 
+const LogOut=({navigation,signOutStart})=>{
 
-const LogOut=(props)=>{
 	return(
-		<View style={{flex:1}}>
+		<View>
+		<Header
+		statusBarProps={{ barStyle: 'light-content' }}
+        barStyle="light-content" // or directly
+        leftComponent={{ icon: 'menu', color: '#fff',onPress:()=>navigation.toggleDrawer(),size:40 }}
+        centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+        containerStyle={{
+    	backgroundColor: '#1976d2',
+    	justifyContent: 'space-around',
+        }}
+        />
 		<Button
-		onPress={props.signOut}
-		title="Logout"
-		color="#841584"
-		style={{flex:1}}
+		icon={
+			<Icon
+			name="sign-out"
+			size={15}
+			color="white"
+			type="font-awesome-5"
+			/>
+		}
+		title="LogOut"
+		onPress={()=>signOutStart()}
 		/>
+	
 		</View>
+
 		);
 };
 
-export default LogOut;
+const mapDispatchToProps=dispatch=>({
+   signOutStart:()=>dispatch(signOutStart())
+})
+
+export default connect(null,mapDispatchToProps)(LogOut);

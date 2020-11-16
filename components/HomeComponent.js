@@ -1,4 +1,5 @@
-import React,{Component} from 'react';
+import React,{useEffect} from 'react';
+import {connect} from 'react-redux';
 import {
   StyleSheet,
   Image,
@@ -7,8 +8,13 @@ import {
 } from 'react-native';
 import  {SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from 'react-native-elements';
+import {fetchCollectionsStartAsync} from '../redux/shop/shop.actions';
+import CarouselComponent from './Carousel';
 
-const Home=({navigation})=>{
+const Home=({navigation,fetchCollectionsStartAsync})=>{
+   useEffect(()=>{
+    fetchCollectionsStartAsync();
+  },[fetchCollectionsStartAsync]);
 	return(
     <View>
     <Header
@@ -22,10 +28,16 @@ const Home=({navigation})=>{
     }}
     />
     <SafeAreaView>
-    <Text> Welcome Home !</Text>
+    <CarouselComponent/>
     </SafeAreaView>
     </View>
     );
 }
 
-export default Home;
+
+
+const mapDispatchToProps=dispatch=>({
+  fetchCollectionsStartAsync:()=>dispatch(fetchCollectionsStartAsync())
+})
+
+export default connect(null,mapDispatchToProps)(Home);

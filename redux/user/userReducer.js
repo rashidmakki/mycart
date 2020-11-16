@@ -1,4 +1,5 @@
 import UserTypes from './userTypes';
+
 const InitialState={
 	user:{},
 	error:null,
