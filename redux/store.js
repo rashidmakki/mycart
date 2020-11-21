@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from './user/user.reducer';
 import shopReducer from './shop/shop.reducer';
 import directoryReducer from './directory/directory.reducer';
+import cartReducer from './cart/cart.reducer';
 import rootSaga from './root-saga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -21,7 +22,8 @@ export const ConfigureStore=()=>{
         persistCombineReducers(config,{
           user:userReducer,
           directory:directoryReducer,
-          shop:shopReducer
+          shop:shopReducer,
+          cart:cartReducer
          }),
          applyMiddleware(sagaMiddleware,thunk,logger)
 		);

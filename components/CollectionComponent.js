@@ -5,9 +5,7 @@ import {
   Image,
   View,
   Text,
-  Dimensions,
-  TouchableOpacity,
-  Alert
+  Dimensions
 } from 'react-native';
 import { createStructuredSelector } from 'reselect';
 import {selectDirectorySections} from '../redux/directory/directory.selectors';
@@ -21,13 +19,9 @@ const CollectionOverView=({selections})=>{
   	<View style={styles.directory}>
        {
       	selections.map(({id,...otherProps})=>(
-       <TouchableOpacity
-          key={id}
-          style={styles.button}
-          onPress={()=>Alert.alert('Its Working')}
-        >
+      
       	  <CollectionOverViewComponent key={id} {...otherProps} />
-      </TouchableOpacity>
+
       	))
      }
     </View>
@@ -47,12 +41,8 @@ const styles=StyleSheet.create({
     	alignContent:'center',
     	width:Width,
     	height:Height,
-    	marginTop:-240 
-    },
-    button: {
-    alignItems: "center",
-    backgroundColor: '#ffffff'
-  }
+    	marginTop:-240
+    }
 });
 
 export default connect(mapStateToProps,null)(CollectionOverView);

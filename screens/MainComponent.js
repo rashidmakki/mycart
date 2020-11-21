@@ -10,12 +10,14 @@ import {
 } from 'react-native';
 import TabComponent from './TabComponent';
 import LogOut from '../components/logout';
+import ItemsPreview from '../components/ItemsPreview';
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator,DrawerItem,DrawerItemList,DrawerContentScrollView} from '@react-navigation/drawer';
 import  {SafeAreaView } from 'react-native-safe-area-context';
 import {Icon} from 'react-native-elements';
 import { createStructuredSelector } from 'reselect';
 import {selectCurrentUser} from '../redux/user/user.selectors';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -48,7 +50,6 @@ const MainNavigator=(props)=>{
 	const currentUserName=props.currentUser.name.toString();
 	const currentUserPhoto=props.currentUser.photo.toString();
   return(
-  	<NavigationContainer independent={true} {...props}>
 	<Drawer.Navigator 
 	initialRouteName='Home' 
 	drawerStyle={{
@@ -57,11 +58,10 @@ const MainNavigator=(props)=>{
 	drawerContent={(props)=><CustomDrawerContentComponent currentUserName={currentUserName} currentUserPhoto={currentUserPhoto} {...props}/>
 	}
 	>
-
 	<Drawer.Screen 
 	name="Home" 
-	component={TabComponent} 
-	options={{title:'Home',drawerLabel:'Home',drawerIcon:({tintColor})=>(
+	component={TabComponent}
+	options={{title:'Home',drawerLabel:'Home',headerShown:false,drawerIcon:({tintColor})=>(
 		<Icon name='home' type='font-awesome-5' size={28} color={tintColor} />)}}
 	/>
 	<Drawer.Screen 
@@ -70,8 +70,14 @@ const MainNavigator=(props)=>{
 	options={{title:'Logout',drawerLabel:'Logout',drawerIcon:({tintColor})=>(
 		<Icon name='log-out' type='entypo' size={26} color={tintColor}  />)}}
 	 />
+	 <Drawer.Screen 
+	name="Cart" 
+	component={ItemsPreview} 
+	options={{title:'Cart',drawerLabel:'Cart',drawerIcon:({tintColor})=>(
+		<Icon name='cart' type='material-community' size={26} color={tintColor}  />)}}
+	 />
 	</Drawer.Navigator>
-	</NavigationContainer>
+	
 		);
 };
 
@@ -84,7 +90,7 @@ const styles=StyleSheet.create({
 	drawerHeader:{
 		backgroundColor:'#1976d2',
 		flexDirection:'row',
-		marginTop:-34
+		marginTop:-4
 	},
 	drawerHeaderText:{
 		color:'white',

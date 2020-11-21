@@ -42,14 +42,14 @@ const CarouselComponent=({sections})=>{
               dotsLength={sections.length}
               activeDotIndex={activeSlide}
               dotStyle={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  marginHorizontal: 8,
+                  width: 12,
+                  height: 12,
+                  borderRadius:8,
+                  marginHorizontal:8,
                   backgroundColor: 'rgba(255, 255, 255, 0.96)'
               }}
               inactiveDotStyle={{
-                width: 12,
+                  width: 12,
                   height: 12,
                   borderRadius: 8,
                   marginHorizontal: 8,
@@ -87,7 +87,7 @@ const CarouselComponent=({sections})=>{
               lockScrollWhileSnapping={true}
               onSnapToItem={(index) => setActiveSlide({...useActiveSlide,activeSlide:index}) }
             />
-            <View style={{position:'relative',marginTop:-140}}>
+            <View style={{position:'absolute',marginTop:190,marginLeft:'15%'}}>
              {pagination()}
             </View>
              </View>

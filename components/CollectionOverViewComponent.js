@@ -7,36 +7,35 @@ import {
   Dimensions,
   ImageBackground
 } from 'react-native';
+import { Tile } from 'react-native-elements';
+import { withNavigation } from '@react-navigation/compat';
+
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const CollectionOverViewComponent=({title,imageUrl})=>{
+const CollectionOverViewComponent=({title,imageUrl,navigation})=>{
   return(
-      	<View style={styles.container}>
-          <View style={styles.header}>
-       <ImageBackground source={{uri:imageUrl}} style={styles.image}>
-          <Text style={styles.header}> {title.toUpperCase()} </Text>
-      </ImageBackground>
-          </View>
-        </View>
+   <View style={styles.container}>
+   <Tile
+   imageSrc={{uri:imageUrl}}
+   title={title.toUpperCase()}
+   featured
+   width={Width-200}
+   height={Height-650}
+   activeOpacity={0.3}
+   titleStyle={{fontSize:28}}
+   onPress={()=>navigation.navigate('Collections',{title:title})}
+   />
+   </View>
   	);
 }
 
 const styles=StyleSheet.create({
     container:{
-    width:Width-200,
-   	height:Height-650,
    	backgroundColor:'#000000',
-    margin:1
-   },
-   image: {
-    width:'100%',
-    height:'100%'
-  },
-  header:{
-    justifyContent:'center',
-    alignItems:'center',
-  }
+    margin:1,
+   }
 });
 
-export default CollectionOverViewComponent;
+
+export default withNavigation(CollectionOverViewComponent);
