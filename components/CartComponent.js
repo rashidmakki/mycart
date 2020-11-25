@@ -1,25 +1,74 @@
-import React,{Component} from 'react';
+import React,{Component,useState} from 'react';
 import {connect} from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import {selectCartItems} from '../redux/cart/cart.selectors';
+import {selectCartItems,selectCartItemsCount,selectCartTotal} from '../redux/cart/cart.selectors';
 import {
   StyleSheet,
   View,
-  Text,
  Animated,
  I18nManager,
- Image
+ Image,
+ TouchableOpacity
 } from 'react-native';
+import { Text } from 'react-native-elements';
 import {  SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import AppleStyleSwipeableRow from './Swipeable';
-import { Icon,Button } from 'react-native-elements';
-import { addItem } from '../redux/cart/cart.actions';
-import {removeItem} from '../redux/cart/cart.actions';
+import { Icon,Button,ButtonGroup } from 'react-native-elements';
+import { addItem,removeItem,clearItemFromCart,clearCart} from '../redux/cart/cart.actions';
+import { withNavigation } from '@react-navigation/compat';
+
+const ButtonGroups=(props)=>{
+  const {TotalCartItems,ToTalCartCost,clearCart,navigation}=props;
+  const [selectedIndex,setSelectedIndex]=useState(2);
+   const updateIndex= (selectedIndex)=> {
+    setSelectedIndex(selectedIndex);
+   }
+   const component1 =() =>(
+    <View>
+    <TouchableOpacity
+      onPress={() => clearCart()}>
+    <Text h4>Clear All</Text>
+    <Text> Items: {TotalCartItems} </Text>
+    </TouchableOpacity>
+    </View>
+    );
+   const component2 = () =>(
+     <TouchableOpacity
+      onPress={()=>navigation.navigate('Checkout',{price:ToTalCartCost})}
+      activeOpacity={0.6}>
+    <Text h4>
+     Proceed 
+     </Text>
+     <Icon
+      name="arrow-forward"
+      type="ionicons"
+      color="black"
+      size={30}
+      containerStyle={{position:'absolute',marginLeft:80}}
+    />
+    <Text> Total: &#x20B9;{ToTalCartCost}</Text>
+    </TouchableOpacity>
+ 
+    );
+    const buttons = [{ element:component1 }, { element: component2 }]
+    return (
+      <ButtonGroup
+      onPress={updateIndex}
+      selectedIndex={selectedIndex}
+      buttons={buttons}
+      selectedTextStyle={{color:'white'}}
+      selectedButtonStyle={{backgroundColor:'#ff5722',color:'white'}}
+      containerStyle={{height: 80,width:'100%',marginLeft:0,position:'absolute',top:615}} 
+      />
+      );
+ 
+}
+
+
 
 const Row = ({ item,addItem,removeItem}) =>{
-    console.log('item',item,addItem,removeItem);
-    const {id,name,price,quantity}=item;
+    const {id,imageUrl,name,price,quantity}=item;
  return(
   <RectButton key={item.id} style={styles.rectButton} >
   <View style={styles.alignment}>
@@ -33,18 +82,19 @@ const Row = ({ item,addItem,removeItem}) =>{
   <View>
   <Text style={styles.fromText}>{item.name}</Text>
   <Text numberOfLines={2} style={styles.messageText}>
-  Price:{item.price}
+  Price:  &#x20B9;{item.price}
   </Text>
    <Button
   icon={
     <Icon
       name="minus-circle"
-      size={24}
+      size={23}
       type="feather"
+      color="white"
     />
   }
-  onPress={(item)=>removeItem(item)}
-  containerStyle={{width:'14%',borderRadius:50,marginLeft:200,marginTop:6,position:'absolute'}}
+  onPress={()=>removeItem(item)}
+  containerStyle={{width:'11%',borderBottomLeftRadius:25,borderTopLeftRadius:25,marginLeft:230,marginTop:6,position:'absolute'}}
   />
   <Text style={styles.dateText}>
       {item.quantity}
@@ -53,11 +103,12 @@ const Row = ({ item,addItem,removeItem}) =>{
   icon={
     <Icon
       name="add-circle-outline"
-      size={24}
+      size={23}
+      color="white"
     />
   }
   onPress={()=>addItem(item)}
-  containerStyle={{width:'14%',borderRadius:50,marginLeft:300,marginTop:6,position:'absolute'}}
+  containerStyle={{width:'11%',borderBottomRightRadius:25,borderTopRightRadius:25,marginLeft:310,marginTop:6,position:'absolute'}}
   />
   </View>
   </View>
@@ -65,34 +116,43 @@ const Row = ({ item,addItem,removeItem}) =>{
   );
 }
 
-const SwipeableRow = ({ item, index,removeItem}) => {
+const SwipeableRow = ({ item, index,removeItem,clearItem,addItem}) => {
     return (
-      <AppleStyleSwipeableRow removeItem={removeItem} item={item}>
+      <AppleStyleSwipeableRow clearItem={clearItem} item={item}>
         <Row item={item} removeItem={removeItem} addItem={addItem} />
       </AppleStyleSwipeableRow>
     );
 };
 
-const CartComponent=({cartItems,removeItem,addItem})=>{
+const CartComponent=({cartItems,removeItem,addItem,clearItem,clearCart, TotalCartItems,ToTalCartCost,navigation})=>{
     return(
+      <View>
        <FlatList
         data={cartItems}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item, index }) => (
-          <SwipeableRow item={item} index={index} removeItem={removeItem} addItem={addItem} />
+          <SwipeableRow item={item} index={index} removeItem={removeItem} addItem={addItem} clearItem={clearItem} />
         )}
         keyExtractor={(item, index) => `message ${index}`}
       />
+      {
+        (TotalCartItems!==0)? <ButtonGroups ToTalCartCost={ToTalCartCost} TotalCartItems={TotalCartItems} clearCart={clearCart} navigation={navigation}/>:null
+      }  
+      </View>
         );
 }
 
 const mapStateToProps=createStructuredSelector({
-    cartItems:selectCartItems
+    cartItems:selectCartItems,
+    TotalCartItems:selectCartItemsCount,
+    ToTalCartCost:selectCartTotal
 });
 
 const mapDispatchToProps=dispatch=>({
   removeItem:(item)=>dispatch(removeItem(item)),
-  addItem:(item)=>dispatch(addItem(item))
+  addItem:(item)=>dispatch(addItem(item)),
+  clearItem:(item)=>dispatch(clearItemFromCart(item)),
+  clearCart:()=>dispatch(clearCart())
 });
 
 const styles = StyleSheet.create({
@@ -130,7 +190,7 @@ const styles = StyleSheet.create({
   dateText: {
     backgroundColor: 'transparent',
     position: 'absolute',
-     marginLeft:270,
+     marginLeft:283,
      marginTop:15,
     color: '#999',
     fontWeight: 'bold',
@@ -138,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(CartComponent);
+export default connect(mapStateToProps,mapDispatchToProps)(withNavigation(CartComponent));

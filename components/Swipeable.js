@@ -6,14 +6,14 @@ import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 const AppleStyleSwipeableRow=(props)=>{
-  const { children,item,removeItem}=props;
+  const { children,item,clearItem}=props;
   const renderLeftActions = (progress, dragX) => {
     const trans = dragX.interpolate({
       inputRange: [0, 50, 100, 101],
       outputRange: [-20, 0, 0, 1],
     });
      const pressHandler = () => {
-      removeItem(item);
+      clearItem(item);
     };
     return (
       <RectButton style={styles.leftAction} onPress={pressHandler}>
@@ -35,7 +35,7 @@ const AppleStyleSwipeableRow=(props)=>{
       outputRange: [x, 0],
     });
     const pressHandler = () => {
-      removeItem(item);
+      clearItem(item);
     };
     return (
       <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>

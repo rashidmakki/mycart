@@ -41,14 +41,8 @@ const ItemsPreview=({collections,addItem,...props})=>{
                 <View style={styles.description}>
                 <Text style={styles.itemTitle}>{name}</Text>
                 <View style={styles.priceDetails}>
-                 <Icon
-                type="font-awesome"
-                size={22}
-                color="black"
-                name="rupee"
-                />
                 <Text style={styles.price}>
-                     {price}
+                     &#x20B9;{price}
                 </Text>
                 </View>
                 <Button

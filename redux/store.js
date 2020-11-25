@@ -12,12 +12,14 @@ import rootSaga from './root-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export const ConfigureStore=()=>{
-  const config={
+const config={
     key:'root',
     storage:AsyncStorage,
     debug:true
   };
+
+export const ConfigureStore=()=>{
+
 	const store=createStore(
         persistCombineReducers(config,{
           user:userReducer,

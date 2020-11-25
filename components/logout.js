@@ -12,6 +12,7 @@ import {signOutStart} from '../redux/user/user.actions';
 const LogOut=({navigation,signOutStart})=>{
 
 	return(
+		<SafeAreaView>
 		<View>
 		<Button
 		icon={
@@ -27,7 +28,7 @@ const LogOut=({navigation,signOutStart})=>{
 		/>
 	
 		</View>
-
+      </SafeAreaView>
 		);
 };
 

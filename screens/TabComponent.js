@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Icon } from 'react-native-elements';
 import Home from '../components/HomeComponent';
 import ItemsPreview from '../components/ItemsPreview';
+import StripeCheckoutButton from '../components/StripeButton';
 import CategoriesComponent from '../components/CategoriesComponent';
 import CartComponent from '../components/CartComponent';
 import {  SafeAreaView } from 'react-native-safe-area-context';
@@ -51,6 +52,7 @@ const CartNavigator=()=>(
     <Stack.Screen name="Cart" component={CartComponent} options={({navigation})=>({
       headerLeft:()=>(<Icon name='menu' size={36} color='white' onPress={()=>navigation.toggleDrawer()} />)
     }) }/>
+    <Stack.Screen name="Checkout" component={StripeCheckoutButton} />
     </Stack.Navigator>
   )
 
