@@ -57,8 +57,10 @@ const ButtonGroups=(props)=>{
       onPress={updateIndex}
       selectedIndex={selectedIndex}
       buttons={buttons}
+      disabled={[1]}
+      disabledStyle={{backgroundColor:'#ff5722'}}
       selectedTextStyle={{color:'white'}}
-      selectedButtonStyle={{backgroundColor:'#ff5722',color:'white'}}
+      selectedButtonStyle={{color:'white'}}
       containerStyle={{height: 80,width:'100%',marginLeft:0,position:'absolute',top:615}} 
       />
       );
