@@ -35,7 +35,7 @@ const ButtonGroups=(props)=>{
     );
    const component2 = () =>(
      <TouchableOpacity
-      onPress={()=>navigation.navigate('Checkout',{price:ToTalCartCost})}
+      onPress={()=>navigation.navigate('Checkout',{price:ToTalCartCost,totalItems:TotalCartItems})}
       activeOpacity={0.6}>
     <Text h4>
      Proceed 
@@ -61,7 +61,7 @@ const ButtonGroups=(props)=>{
       disabledStyle={{backgroundColor:'#ff5722'}}
       selectedTextStyle={{color:'white'}}
       selectedButtonStyle={{color:'white'}}
-      containerStyle={{height: 80,width:'100%',marginLeft:0,position:'absolute',top:615}} 
+      containerStyle={{height: 80,width:'100%',zIndex:1,marginLeft:0,position:'absolute',top:615}} 
       />
       );
  

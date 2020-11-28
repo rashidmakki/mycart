@@ -38,6 +38,7 @@ firebase/
 android/app/google-services.json
 android/app/debug.keystore
 
+components/payment/Constants.js
 # BUCK
 buck-out/
 \.buckd/

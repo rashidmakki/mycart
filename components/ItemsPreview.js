@@ -25,7 +25,7 @@ const ItemsPreview=({collections,addItem,...props})=>{
       <ScrollView>
       {
         collections.filter(({id,title,routeName,items})=>titleName===routeName?{id,title,routeName,items}:null).map(({id,items,title})=>(
-         <View style={styles.container}>
+         <View key={id} style={styles.container}>
          <Text style={styles.headerTitle}>{title.toUpperCase()} </Text>
           
           {

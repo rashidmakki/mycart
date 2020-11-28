@@ -90,7 +90,7 @@ const styles=StyleSheet.create({
 	drawerHeader:{
 		backgroundColor:'#1976d2',
 		flexDirection:'row',
-		marginTop:-32
+		marginTop:-4
 	},
 	drawerHeaderText:{
 		color:'white',

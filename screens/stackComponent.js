@@ -16,6 +16,10 @@ import auth from '@react-native-firebase/auth';
 import MainNavigator from './MainComponent';
 import {googleSignInStart} from '../redux/user/user.actions';
 import {googleConfigure} from '../firebase/firebase';
+import {
+  SQIPCore,
+} from 'react-native-square-in-app-payments';
+
 
 const Stack=createStackNavigator();
 
@@ -25,13 +29,14 @@ class LoginHomeStack extends React.Component{
 		super(props);
   }
   
-	  componentDidMount() {
-	    GoogleSignin.configure({
+	  async componentDidMount() {
+	    await GoogleSignin.configure({
          webClientId:'77084579600-b4cb4aodqquf65qpckmnc3ag39djpvhk.apps.googleusercontent.com', // client ID of type WEB for your server(needed to verify user ID and offline access)
          offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
          forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
          accountName: '', // [Android] specifies an account name on the device that should be used
-     })
+     });
+      await SQIPCore.setSquareApplicationId('sandbox-sq0idb-WNqFRYmxerUb9FT7-Ia5Ng');
 	  } 
 	  signIn =async (props)=>{
       const {googleSignInStart}=this.props;
