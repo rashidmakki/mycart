@@ -16,10 +16,6 @@ import auth from '@react-native-firebase/auth';
 import MainNavigator from './MainComponent';
 import {googleSignInStart} from '../redux/user/user.actions';
 import {googleConfigure} from '../firebase/firebase';
-import {
-  SQIPCore,
-} from 'react-native-square-in-app-payments';
-
 
 const Stack=createStackNavigator();
 
@@ -36,7 +32,6 @@ class LoginHomeStack extends React.Component{
          forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
          accountName: '', // [Android] specifies an account name on the device that should be used
      });
-      await SQIPCore.setSquareApplicationId('sandbox-sq0idb-WNqFRYmxerUb9FT7-Ia5Ng');
 	  } 
 	  signIn =async (props)=>{
       const {googleSignInStart}=this.props;

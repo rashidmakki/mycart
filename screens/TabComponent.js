@@ -5,7 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Icon } from 'react-native-elements';
 import Home from '../components/HomeComponent';
 import ItemsPreview from '../components/ItemsPreview';
-import StripeCheckoutButton from '../components/payment/screens/StripeButton';
+import StripeCheckoutButton from '../components/StripeButton';
 import CategoriesComponent from '../components/CategoriesComponent';
 import CartComponent from '../components/CartComponent';
 import {  SafeAreaView } from 'react-native-safe-area-context';
