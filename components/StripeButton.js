@@ -1,37 +1,64 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   StyleSheet,
   Image,
   View,
   Text,
   Dimensions,
-  Platform
+  Platform,
+  ScrollView
 } from 'react-native';
 import { Icon,Card,Button,Input} from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Fumi } from 'react-native-textinput-effects';
+import Modal from 'react-native-modal';
+import { Divider } from 'react-native-elements';
 
 const Height=Dimensions.get('window').height;
+const deviceWidth = Dimensions.get("window").width;
+const deviceHeight = Platform.OS === "ios"
+  ? Dimensions.get("window").height
+  : Dimensions.get("window").height;
 
 const StripeCheckoutButton = (props) => {
-  const totalPrice=props.route.params.price;
-  const totalItems=props.route.params.totalItems;
+   const [isModalVisible, setModalVisible] = useState(false);
+   const totalPrice=props.route.params.price;
+   const totalItems=props.route.params.totalItems;
+  
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
  const CartDescription=()=>{
    return(
-      <View style={{height:Height-740,width:'100%',position:'absolute',zIndex:1, flex:1,flexDirection:'row',justifyContent:'space-between',backgroundColor:'#b4ffff'}}>
+    <View>
+      <View style={{height:Height-740,width:'100%',position:'absolute', flex:1,flexDirection:'row',justifyContent:'space-between',backgroundColor:'#b4ffff'}}>
        <Text style={{fontSize:20,padding:20}}> Total Items: {totalItems}</Text>
         <Text style={{fontSize:20,padding:20}}> Total:  &#x20B9;{totalPrice}</Text>
       </View>
+      <Button title="Add Address" onPress={toggleModal} containerStyle={{position:'absolute',top:60,width:'100%'}} />
+    </View>  
     );
  }
  const BillingComponent=()=>{
    return (
-    <View style={{flex:1,postion:'absolute',top:60,height:Height+20}}>
-    <Card style={styles.addressCard}>
+     <Modal 
+      propagateSwipe
+      isVisible={isModalVisible}
+      deviceWidth={deviceWidth}
+      deviceHeight={deviceHeight}
+       animationType="slide"
+      transparent={true}
+      onBackdropPress={() => setModalVisible(false)}
+      swipeDirection={['down']}
+      style={{ justifyContent: 'flex-end', margin: 0}}
+      >
+      <View style={{height:deviceHeight-80,width:deviceWidth,backgroundColor:'white'}}>
+     <ScrollView>
      <Text style={styles.addressHeader}>SHIPPING & BILLING INFORMATION</Text>
+     <Divider style={{ backgroundColor: 'blue' }} />
      <Fumi
      label={'FirstName'}
      iconClass={FontAwesomeIcon}
@@ -113,8 +140,10 @@ const StripeCheckoutButton = (props) => {
      iconWidth={40}
      inputPadding={16}
      />
-    </Card>
-    </View>
+     <Button onPress={()=>setModalVisible(false)} title='Cancel' />
+     </ScrollView>
+     </View>
+    </Modal>
   );
  }
  
@@ -168,8 +197,10 @@ const styles=StyleSheet.create({
   },
   addressHeader:{
     fontSize:21,
-    marginBottom:15,
-    fontWeight:'bold'
+    marginBottom:10,
+    fontWeight:'bold',
+    justifyContent:'center',
+    padding:10
   },
   Card:{
     flex:1,
