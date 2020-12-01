@@ -15,6 +15,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { Fumi } from 'react-native-textinput-effects';
 import Modal from 'react-native-modal';
 import { Divider } from 'react-native-elements';
+import StripeCheckout from 'react-native-stripe-checkout-webview';
 
 const Height=Dimensions.get('window').height;
 const deviceWidth = Dimensions.get("window").width;
@@ -24,6 +25,7 @@ const deviceHeight = Platform.OS === "ios"
 
 const StripeCheckoutButton = (props) => {
    const [isModalVisible, setModalVisible] = useState(false);
+   const [isPaymentClicked,setIsPaymentClicked]=useState(false);
    const totalPrice=props.route.params.price;
    const totalItems=props.route.params.totalItems;
   
@@ -55,7 +57,7 @@ const StripeCheckoutButton = (props) => {
       swipeDirection={['down']}
       style={{ justifyContent: 'flex-end', margin: 0}}
       >
-      <View style={{height:deviceHeight-80,width:deviceWidth,backgroundColor:'white'}}>
+      <View style={{height:deviceHeight-80,width:deviceWidth,backgroundColor:'white',borderTopLeftRadius:15,borderTopRightRadius:15}}>
      <ScrollView>
      <Text style={styles.addressHeader}>SHIPPING & BILLING INFORMATION</Text>
      <Divider style={{ backgroundColor: 'blue' }} />
@@ -167,9 +169,39 @@ const StripeCheckoutButton = (props) => {
   containerStyle={{position:'absolute',zIndex:1,height:75,width:'100%',top:Height-185}}
   title="Pay Now"
   titleStyle={{fontSize:26}}
+  onPress={()=>setIsPaymentClicked(true)}
 />
     )
  }
+ const checkoutSessionIdFetch=async ()=>{
+     const fetchSession=await fetch(`http://192.168.1.247/create-checkout-session`,{
+      method:'POST'
+     });
+     const Response=await fetchSession.json();
+     console.log('fetchSession',Response);
+    return Response;
+ }
+
+ type Props = { STRIPE_PUBLIC_KEY: String, CHECKOUT_SESSION_ID: String};
+
+const MyStripeCheckout = ({ STRIPE_PUBLIC_KEY, CHECKOUT_SESSION_ID }: Props) =>{
+    
+   return(
+  <StripeCheckout
+    stripePublicKey={STRIPE_PUBLIC_KEY}
+    checkoutSessionInput={{
+      sessionId: CHECKOUT_SESSION_ID,
+    }}
+    onSuccess={({ checkoutSessionId }) => {
+      console.log(`Stripe checkout session succeeded. session id: ${checkoutSessionId}.`);
+    }}
+    onCancel={() => {
+      console.log(`Stripe checkout session cancelled.`);
+    }}
+  />
+);
+ }
+
  return(    
             <View>
             <CartDescription />
@@ -187,6 +219,9 @@ const StripeCheckoutButton = (props) => {
             keyExtractor={(item, index) => `message ${index}`}
             />
             <ButtonSubmit />
+            {
+            (isPaymentClicked)?<MyStripeCheckout STRIPE_PUBLIC_KEY='pk_test_51H2a4YBFNahoJiBBTQDQ3guYdvsLv74Nyxj0BWDvMc24EG2MDnHfJJjMRG3TWpWcd7dPiatNP1qwq8jL0ig0e9mo00HZg33sxx' CHECKOUT_SESSION_ID='fsncnjsdckdnsxs'/>:null
+            }
             </View>
   );
 };

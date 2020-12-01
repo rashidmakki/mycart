@@ -12,6 +12,8 @@ target 'MyCart' do
 
   pod 'RNSquareInAppPayments', :path => '../node_modules/react-native-square-in-app-payments'
 
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'MyCartTests' do
     inherit! :complete
     # Pods for testing
