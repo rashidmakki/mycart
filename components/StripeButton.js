@@ -26,6 +26,7 @@ const deviceHeight = Platform.OS === "ios"
 const StripeCheckoutButton = (props) => {
    const [isModalVisible, setModalVisible] = useState(false);
    const [isPaymentClicked,setIsPaymentClicked]=useState(false);
+   const [checkoutSessionIdfetch,setCheckoutSessionIdfetch]=useState('');
    const totalPrice=props.route.params.price;
    const totalItems=props.route.params.totalItems;
   
@@ -169,17 +170,17 @@ const StripeCheckoutButton = (props) => {
   containerStyle={{position:'absolute',zIndex:1,height:75,width:'100%',top:Height-185}}
   title="Pay Now"
   titleStyle={{fontSize:26}}
-  onPress={()=>setIsPaymentClicked(true)}
+  onPress={()=>{checkoutSessionIdFetch(),setIsPaymentClicked(true);}}
 />
     )
  }
  const checkoutSessionIdFetch=async ()=>{
-     const fetchSession=await fetch(`http://192.168.1.247/create-checkout-session`,{
+     const fetchSession=await fetch(`http://192.168.1.247:5000/create-checkout-session`,{
       method:'POST'
      });
      const Response=await fetchSession.json();
-     console.log('fetchSession',Response);
-    return Response;
+     console.log('fetchSessionid',Response.id);
+     setCheckoutSessionIdfetch(Response.id);
  }
 
  type Props = { STRIPE_PUBLIC_KEY: String, CHECKOUT_SESSION_ID: String};
@@ -220,7 +221,7 @@ const MyStripeCheckout = ({ STRIPE_PUBLIC_KEY, CHECKOUT_SESSION_ID }: Props) =>{
             />
             <ButtonSubmit />
             {
-            (isPaymentClicked)?<MyStripeCheckout STRIPE_PUBLIC_KEY='pk_test_51H2a4YBFNahoJiBBTQDQ3guYdvsLv74Nyxj0BWDvMc24EG2MDnHfJJjMRG3TWpWcd7dPiatNP1qwq8jL0ig0e9mo00HZg33sxx' CHECKOUT_SESSION_ID='fsncnjsdckdnsxs'/>:null
+            (isPaymentClicked)?<MyStripeCheckout STRIPE_PUBLIC_KEY='pk_test_51H2a4YBFNahoJiBBTQDQ3guYdvsLv74Nyxj0BWDvMc24EG2MDnHfJJjMRG3TWpWcd7dPiatNP1qwq8jL0ig0e9mo00HZg33sxx' CHECKOUT_SESSION_ID={checkoutSessionIdfetch}/>:null
             }
             </View>
   );
