@@ -37,6 +37,9 @@ yarn-error.log
 firebase/
 android/app/google-services.json
 android/app/debug.keystore
+android/java_pid6240.hprof
+android/java_pid6240
+android/app/src/main/java/com/mycart/generated/BasePackageList.java
 
 components/payment/Constants.js
 # BUCK
