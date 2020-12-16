@@ -40,8 +40,7 @@ const styles=StyleSheet.create({
     	justifyContent:'center',
     	alignContent:'center',
     	width:Width,
-    	height:Height,
-    	marginTop:-240
+    	height:Height
     }
 });
 

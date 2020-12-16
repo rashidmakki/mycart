@@ -28,7 +28,11 @@ const Home=({fetchCollectionsStartAsync})=>{
             <CarouselComponent/>
             );
           case 1:
-          return (<CollectionOverView />);
+          return (
+            <View style={styles.Collection}>
+            <CollectionOverView />
+            </View>
+            );
           return 'Nothing is present';
         }
       }
@@ -42,6 +46,12 @@ const Home=({fetchCollectionsStartAsync})=>{
 
 const mapDispatchToProps=dispatch=>({
   fetchCollectionsStartAsync:()=>dispatch(fetchCollectionsStartAsync())
+})
+
+const styles=StyleSheet.create({
+  Collection:{
+    top:-270
+  }
 })
 
 export default connect(null,mapDispatchToProps)(Home);

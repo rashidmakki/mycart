@@ -2,30 +2,41 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  FlatList
 } from 'react-native';
 import {  SafeAreaView } from 'react-native-safe-area-context';
-import { Header } from 'react-native-elements';
+import CollectionOverView from './CollectionComponent';
 
 const CategoriesComponent=({navigation})=>{
 	return(
-		<View>
-		<Header
-		statusBarProps={{ barStyle: 'light-content' }}
-        barStyle="light-content" // or directly
-        leftComponent={{ icon: 'menu', color: '#fff',onPress:()=>navigation.toggleDrawer(),size:40 }}
-        centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-        containerStyle={{
-    	backgroundColor: '#1976d2',
-    	justifyContent: 'space-around',
-    }}
-    />
+	<View>
     <SafeAreaView>
-    <Text> This is Categories Component </Text>
-
+     <FlatList
+      data={['CollectionOverView']}
+      keyExtractor={data=>data}
+      renderItem={({item,index})=>{
+        switch (index){
+          case 0:
+          return (
+            <View style={styles.Collection}>
+            <CollectionOverView />
+            </View>
+            ); 
+          return 'Nothing is present';
+        }
+      }
+    }
+    /> 
     </SafeAreaView>
     </View>
 		);
 }
+
+const styles=StyleSheet.create({
+  Collection:{
+    top:-164     
+  }
+})
 
 export default CategoriesComponent;

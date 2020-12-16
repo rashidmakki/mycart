@@ -65,19 +65,19 @@ const OnboardingScreen=({navigation})=>{
 		pages={[
 			{
 				backgroundColor: '#a6e4d0',
-				image: <Image source={require('../assests/onboarding-img1.png')} />,
+				image: <Image source={require('../components/images/onboarding-img1.png')} />,
 				title: 'Onboarding 1',
 				subtitle: 'Done with React Native Onboarding Swiper',
 			},
 			{
 				backgroundColor: '#fdeb93',
-				image: <Image source={require('../assests/onboarding-img2.png')} />,
+				image: <Image source={require('../components/images/onboarding-img2.png')} />,
 				title: 'Onboarding 2',
 				subtitle: 'Done with React Native Onboarding Swiper',
 			},
 			{
 				backgroundColor: '#e9bcbe',
-				image: <Image source={require('../assests/onboarding-img3.png')} />,
+				image: <Image source={require('../components/images/onboarding-img3.png')} />,
 				title: 'Onboarding 3',
 				subtitle: 'Done with React Native Onboarding Swiper',
 			}

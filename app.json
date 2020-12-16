@@ -1,18 +1,19 @@
   {
     "name": "MyCart",
+    "slug": "MyCart",
+    "version": "1.0.0",
+    "orientation": "portrait",
     "displayName": "MyCart",
-    "description": "Example application that showcases all the different modules that react-native-offline has to offer",
+    "description": " application that showcases all the different modules that react-native-offline has to offer",
     "privacy": "public",
     "sdkVersion": "1.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assests/logo/logo.png",
+    "icon": "./assets/logo.png",
     "splash": {
-      "image": "./assests/logo/logo.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,9 +21,15 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "./components/images/*"
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "android": {
+      "package": "com.mycart"
     }
   }

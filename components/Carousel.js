@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import Carousel,{ getInputRangeFromIndexes,Pagination}  from 'react-native-snap-carousel'; 
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import {selectDirectorySections} from '../redux/directory/directory.selectors';
-
+import { useTheme } from '@react-navigation/native';
 
 
 const sliderWidth = Dimensions.get('window').width;
@@ -21,9 +21,10 @@ const itemHeight = 400;
 
 
 const CardComponent = ({imageUrl,title}) =>{
-  return(
-    <Card>
-    <Card.Title title={title.toUpperCase()}  />
+   const {colors}=useTheme();
+  return( 
+    <Card style={{borderColor:colors.text,borderWidth:1}}>
+    <Card.Title title={title.toUpperCase()} style={{backgroundColor:colors.background}} titleStyle={{color:colors.text}}  />
     <Card.Cover source={{ uri:imageUrl}} />
   </Card>
   );
@@ -31,6 +32,7 @@ const CardComponent = ({imageUrl,title}) =>{
 
 
 const CarouselComponent=({sections})=>{
+   
     const [useActiveSlide,setActiveSlide]=useState({
       activeSlide:0
     });
@@ -63,7 +65,7 @@ const CarouselComponent=({sections})=>{
     }
 
    const _renderItem = ({idx,item}) => {
-        return (
+        return (  
             <View style={styles.slide}>
                <View style={styles.slideInnerContainer}>
                 <CardComponent key={idx} {...item} />
@@ -72,7 +74,7 @@ const CarouselComponent=({sections})=>{
         );
     }
         return (
-          <View style={{position:'relative'}}>
+          <View style={[{position:'relative'}]}>
             <Carousel
               ref={(c) => {_carousel = c; }}
               data={sections}

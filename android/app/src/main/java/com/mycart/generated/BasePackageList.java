@@ -11,7 +11,8 @@ public class BasePackageList {
         new expo.modules.filesystem.FileSystemPackage(),
         new expo.modules.imageloader.ImageLoaderPackage(),
         new expo.modules.payments.stripe.StripePackage(),
-        new expo.modules.permissions.PermissionsPackage()
+        new expo.modules.permissions.PermissionsPackage(),
+        new expo.modules.securestore.SecureStorePackage()
     );
   }
 }

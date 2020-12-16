@@ -6,7 +6,9 @@ import {
   Text,
   Dimensions,
   Platform,
-  ScrollView
+  ScrollView,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Icon,Card,Button,Input} from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
@@ -18,6 +20,9 @@ import { Divider } from 'react-native-elements';
 import { withNavigation } from '@react-navigation/compat';
 import { PaymentsStripe as Stripe } from 'expo-payments-stripe';
 import { CreditCardInput} from "react-native-credit-card-input";
+import Spinner from 'react-native-loading-spinner-overlay';
+import * as SecureStore from 'expo-secure-store';
+import { useTheme } from '@react-navigation/native';
 
 const Height=Dimensions.get('window').height;
 const deviceWidth = Dimensions.get("window").width;
@@ -27,6 +32,7 @@ const deviceHeight = Platform.OS === "ios"
 
 const StripeCheckoutButton = (props) => {
    const [isModalVisible, setModalVisible] = useState(false);
+   const [isLoading,setIsLoading]=useState(false);
    const [useShippingAddress,setShippingAddress]=useState({
     FirstName:'',
     LastName:'',
@@ -67,6 +73,13 @@ const StripeCheckoutButton = (props) => {
     );
  }
  const BillingComponent=()=>{
+   const {colors,dark}=useTheme();
+   const handleRegister=()=>{
+     return(
+      SecureStore.setItemAsync('userinfo',JSON.stringify({FirstName:FirstName,LastName:LastName,AddressLine1:AddressLine1,AddressLine2:AddressLine2,City:City,State:State,Country:Country,Email:Email,Phone:Phone,PostalCode:PostalCode}))
+      .catch(error=>console.log('Could not save the info',error))
+    )
+   }
    return (
      <Modal 
       propagateSwipe
@@ -79,26 +92,33 @@ const StripeCheckoutButton = (props) => {
       swipeDirection={['down']}
       style={{ justifyContent: 'flex-end', margin:0,zIndex:2}}
       >
-      <View style={{height:deviceHeight-80,width:deviceWidth,backgroundColor:'white',borderTopLeftRadius:15,borderTopRightRadius:15}}>
+      <View style={{height:deviceHeight-80,width:deviceWidth,backgroundColor:colors.background,borderTopLeftRadius:15,borderTopRightRadius:15}}>
      <ScrollView>
-     <Text style={styles.addressHeader}>SHIPPING & BILLING INFORMATION</Text>
-     <Divider style={{ backgroundColor: 'blue' }} />
+     <Text style={[styles.addressHeader,{color:colors.text}]}>SHIPPING & BILLING INFORMATION</Text>
+     <Divider style={{ backgroundColor: dark?'white':'blue' }} />
      <Fumi
+     style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'FirstName'}
      iconClass={FontAwesomeIcon}
      iconName={'user'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      inputPadding={16}
      value={FirstName}
-     onChangeText={(text) =>setShippingAddress({...useShippingAddress,FirstName:text}) }
-     />
+     onChangeText={(text) =>{
+            setShippingAddress({...useShippingAddress,FirstName:text}) }}
+     /> 
     <Fumi
+     style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'LastName'}
      iconClass={FontAwesomeIcon}
      iconName={'user'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      inputPadding={16}
@@ -106,10 +126,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,LastName:text}) }
      />
     <Fumi
+     style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'AddressLine1'}
      iconClass={MaterialIcon}
      iconName={'local-shipping'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      inputPadding={16}
@@ -117,10 +140,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,AddressLine1:text}) }
      />
      <Fumi
+      style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'AddressLine2'}
      iconClass={MaterialIcon}
      iconName={'local-shipping'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      inputPadding={16}
@@ -128,10 +154,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,AddressLine2:text}) }
      />
      <Fumi
+      style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'City'}
      iconClass={MaterialIcon}
      iconName={'location-city'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      value={City}
@@ -139,10 +168,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,City:text}) }
      />
      <Fumi
+      style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'State'}
      iconClass={FontAwesomeIcon}
      iconName={'globe'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      value={State}
@@ -150,10 +182,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,State:text}) }
      />
       <Fumi
+       style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'Country'}
      iconClass={FontAwesomeIcon}
      iconName={'globe'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      value={Country}
@@ -161,10 +196,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,Country:text}) }
      />
      <Fumi
+      style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'Email'}
      iconClass={MaterialIcon}
      iconName={'email'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      value={Email}
      iconSize={20}
      iconWidth={40}
@@ -172,10 +210,13 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,Email:text}) }
      />
      <Fumi
+      style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'Phone'}
      iconClass={MaterialIcon}
      iconName={Platform.OS==='ios'?'phone-iphone':'phone-android'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      value={Phone}
@@ -183,17 +224,20 @@ const StripeCheckoutButton = (props) => {
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,Phone:text}) }
      />
       <Fumi
+       style={{backgroundColor:colors.background}}
+     labelStyle={{color:colors.text}}
+     inputStyle={{color:colors.text}}
      label={'PostalCode'}
      iconClass={MaterialIcon}
      iconName={'location-pin'}
-     iconColor={'#f95a25'}
+     iconColor={dark?'white':'#f95a25'}
      iconSize={20}
      iconWidth={40}
      inputPadding={16}
      value={PostalCode}
      onChangeText={(text) =>setShippingAddress({...useShippingAddress,PostalCode:text}) }
      />
-     <Button onPress={()=>setModalVisible(false)} title='Submit' containerStyle={{width:'90%',marginBottom:10,marginLeft:20}} />
+     <Button onPress={()=>{handleRegister();setModalVisible(false)}} title='Submit' containerStyle={{width:'90%',marginBottom:10,marginLeft:20}} />
      <Button onPress={()=>setModalVisible(false)} title='Cancel' containerStyle={{width:'90%',marginBottom:10,marginLeft:20}} />
       </ScrollView>
      </View>
@@ -221,12 +265,13 @@ const StripeCheckoutButton = (props) => {
   containerStyle={{position:'absolute',zIndex:1,width:'100%',top:Height-185}}
   title="Pay Now"
   titleStyle={{fontSize:26}}
-  onPress={()=>{checkoutSessionIdFetch()}}
-/>
-    )
+  loading={isLoading}
+  onPress={()=>{setIsLoading(true); setTimeout(()=>{checkoutSessionIdFetch()},3000); setTimeout(()=>{setIsLoading(false)},8000)}}
+/>);
  }
  const checkoutSessionIdFetch=async ()=>{
-   await Stripe.setOptionsAsync({
+  if(number!==''&&cvc!==''&&expiry!==''&&FirstName!==''&&City!==''&&State!==''&&Country!==''&&PostalCode!==''){
+    await Stripe.setOptionsAsync({
     publishableKey: 'pk_test_51H2a4YBFNahoJiBBTQDQ3guYdvsLv74Nyxj0BWDvMc24EG2MDnHfJJjMRG3TWpWcd7dPiatNP1qwq8jL0ig0e9mo00HZg33sxx' //  Your key
    });
    const params = {
@@ -250,7 +295,8 @@ const token = await Stripe.createTokenWithCardAsync(params);
    
    const body={
     token,
-    totalPrice
+    totalPrice,
+    Email
    }
   fetch(`https://frozen-badlands-23496.herokuapp.com/checkout`,{
     method:'POST',
@@ -264,11 +310,16 @@ const token = await Stripe.createTokenWithCardAsync(params);
   .then(({id,balance_transaction,amount})=>({id,balance_transaction,amount}))
   .then(data=>navigation.navigate('Success',{Success:data}))
   .catch((err)=>console.log(err.message))
+   }else{
+    Alert.alert("Kindly fill your details correctly !");
+   }
+   
  }
 
 const CardComponent=()=>{
+  const {colors}=useTheme();
  const onChange=form=>{
-  if(form.status.number!=='incomplete'&&form.status.expiry!=='incomplete'&&form.status.cvc!=='incomplete'){
+  if(form.status.number!=='incomplete'&&form.status.expiry!=='incomplete'&&form.status.cvc!=='incomplete'&&form.status.name!=='incomplete'&&form.status.postalCode!=='incomplete'){
   setCardDetails({...useCardDetails,number:form.values.number,cvc:form.values.cvc,expiry:form.values.expiry,type:form.values.type});
   }
   console.log(form);
@@ -279,9 +330,13 @@ const CardComponent=()=>{
      onChange={onChange} 
      cardScale={1} 
      allowScroll={true}
+     inputStyle={{color:colors.text}}
+     placeholderColor={colors.text}
+     labelStyle={{color:colors.text}}
      autoFocus
      requiresName
      requiresCVC
+     requiresPostalCode
      />
      </View>
     )
@@ -305,6 +360,7 @@ const CardComponent=()=>{
             keyExtractor={(item, index) => `message ${index}`}
             />
             <ButtonSubmit />
+            <Spinner textContent={'Loading...'} visible={isLoading} textStyle={styles.spinnerTextStyle}/>
             </View>
   );
 };
@@ -323,6 +379,9 @@ const styles=StyleSheet.create({
   Card:{
     flex:1,
     marginBottom:10
+  },
+   spinnerTextStyle: {
+    color: '#FFF'
   }
 })
 

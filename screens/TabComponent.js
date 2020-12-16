@@ -5,12 +5,14 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Icon } from 'react-native-elements';
 import Home from '../components/HomeComponent';
 import ItemsPreview from '../components/ItemsPreview';
+import ItemView from '../components/ItemView';
 import StripeCheckoutButton from '../components/StripeButton';
 import Success from '../components/Success.js';
 import CategoriesComponent from '../components/CategoriesComponent';
 import CartComponent from '../components/CartComponent';
 import {  SafeAreaView } from 'react-native-safe-area-context';
 import {createStackNavigator} from '@react-navigation/stack';
+import { useTheme } from '@react-navigation/native';
 
 const Stack=createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -33,7 +35,10 @@ const HomeNavigator=()=>(
     <Stack.Screen name="Home" component={Home} options={({navigation})=>({
       headerLeft:()=>(<Icon name='menu' size={36} color='white' onPress={()=>navigation.toggleDrawer()} />)
     }) }/>
-    <Stack.Screen name="Collections" component={ItemsPreview} />
+    <Stack.Screen name="Collections" options={({route})=>({
+       title:route.params.title.toUpperCase()
+    })} component={ItemsPreview} />
+    <Stack.Screen name="Item" component={ItemView} />
     </Stack.Navigator>
     
     );
@@ -58,13 +63,36 @@ const CartNavigator=()=>(
     </Stack.Navigator>
   )
 
+const CategoriesNavigator=()=>(
+       <Stack.Navigator 
+       initialRouteName='Categories' 
+        screenOptions={{
+       headerStyle:{
+        backgroundColor:'#1976d2'
+      },
+      headerTintColor:'#fff',
+      headerTitleStyle:{
+        color:'#fff'
+      },
+    }}>
+    <Stack.Screen name="Categories" component={CategoriesComponent} options={({navigation})=>({
+      headerLeft:()=>(<Icon name='menu' size={36} color='white' onPress={()=>navigation.toggleDrawer()} />)
+    }) }/>
+    <Stack.Screen name="Collections" options={({route})=>({
+       title:route.params.title.toUpperCase()
+    })} component={ItemsPreview} />
+    
+    </Stack.Navigator>
+  )
+
 const MyTabs=()=>{
+  const {colors,dark}=useTheme();
   return (
     <Tab.Navigator
       initialRouteName="Home"
       activeColor="white"
       labelStyle={{ fontSize: 12 }}
-      style={{ backgroundColor: '#1976d2' }}
+      barStyle={{ backgroundColor: dark?colors.background:'#1976d2' }}
     >
       <Tab.Screen
         name="Home"
@@ -78,7 +106,7 @@ const MyTabs=()=>{
       />
       <Tab.Screen
         name="Categories"
-        component={CategoriesComponent}
+        component={CategoriesNavigator}
         options={{
           tabBarLabel: 'Categories',
           tabBarIcon: ({ color }) => (

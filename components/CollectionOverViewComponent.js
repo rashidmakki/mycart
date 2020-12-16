@@ -1,11 +1,10 @@
-import React from 'react';
+  import React from 'react';
 import {
   StyleSheet,
   Image,
   View,
   Text,
-  Dimensions,
-  ImageBackground
+  Dimensions 
 } from 'react-native';
 import { Tile } from 'react-native-elements';
 import { withNavigation } from '@react-navigation/compat';

@@ -1,31 +1,33 @@
-import React,{Component} from 'react';
+ import React,{Component} from 'react';
 import { connect } from 'react-redux';
 import {
   StyleSheet,
   Image,
   View,
   Text,
-  Dimensions ,
-  Button
+  Dimensions 
 } from 'react-native';
 import TabComponent from './TabComponent';
-import LogOut from '../components/logout';
 import ItemsPreview from '../components/ItemsPreview';
+import Settings from '../components/Settings';
+import AccordionView from '../components/DrawerCollapse';
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator,DrawerItem,DrawerItemList,DrawerContentScrollView} from '@react-navigation/drawer';
 import  {SafeAreaView } from 'react-native-safe-area-context';
-import {Icon} from 'react-native-elements';
+import {Icon,Button} from 'react-native-elements';
 import { createStructuredSelector } from 'reselect';
 import {selectCurrentUser} from '../redux/user/user.selectors';
-
+import {signOutStart} from '../redux/user/user.actions';
+import { useTheme } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
 const Drawer=createDrawerNavigator();
-
-   const CustomDrawerContentComponent=({currentUserName,currentUserPhoto,...props})=>{
+   
+   const CustomDrawerContentComponent=({currentUserName,currentUserPhoto,signOutStart,...props})=>{
+	const {colors}=useTheme();
 	return(
      <DrawerContentScrollView {...props}>
          <SafeAreaView style={styles.container} forceInset={{top:'always',horizontal:'never'}}>
@@ -36,6 +38,26 @@ const Drawer=createDrawerNavigator();
              <View style={{flex:3,marginTop:32}}>
                <Text style={styles.drawerHeaderText}> {currentUserName}</Text>
              </View>
+          </View> 
+          <View>
+
+          <Button
+          icon={
+          	<Icon
+          	name='sign-out-alt'
+          	size={20}
+          	color={colors.text}
+          	type="font-awesome-5"
+          	/>
+          }
+          type="outline"
+          title="LogOut"
+          titleStyle={{color:colors.text,padding:5,fontSize:17}}
+          onPress={()=>signOutStart()}
+          />
+          </View>
+          <View>
+          <AccordionView colors={colors} />  
           </View>
           <DrawerItem label=''/>
           <DrawerItemList {...props} />
@@ -46,36 +68,38 @@ const Drawer=createDrawerNavigator();
 
 
 
-const MainNavigator=(props)=>{
+const MainNavigator=({signOutStart,...props})=>{
 	const currentUserName=props.currentUser.name.toString();
 	const currentUserPhoto=props.currentUser.photo.toString();
+	const {colors}=useTheme();
   return(
 	<Drawer.Navigator 
 	initialRouteName='Home' 
 	drawerStyle={{
-		backgroundColor: 'white'
+		backgroundColor:colors.background
 	}} 
-	drawerContent={(props)=><CustomDrawerContentComponent currentUserName={currentUserName} currentUserPhoto={currentUserPhoto} {...props}/>
-	}
+	screenOptions={{headerStyle:{backgroundColor:'#1976d2'}}}
+	drawerContent={(props)=><CustomDrawerContentComponent currentUserName={currentUserName} currentUserPhoto={currentUserPhoto} signOutStart={signOutStart} {...props}/>
+	}  
 	>
 	<Drawer.Screen 
 	name="Home" 
 	component={TabComponent}
-	options={{title:'Home',drawerLabel:'Home',headerShown:false,drawerIcon:({tintColor})=>(
-		<Icon name='home' type='font-awesome-5' size={28} color={tintColor} />)}}
+	options={{title:'Home',drawerLabel:'Home',headerTitleStyle:{color:colors.text},headerShown:false,drawerIcon:({tintColor})=>(
+		<Icon name='home' type='font-awesome-5' size={28} color={colors.text} />)}}
 	/>
-	<Drawer.Screen 
-	name="Logout" 
-	component={LogOut} 
-	options={{title:'Logout',drawerLabel:'Logout',drawerIcon:({tintColor})=>(
-		<Icon name='log-out' type='entypo' size={26} color={tintColor}  />)}}
-	 />
 	 <Drawer.Screen 
 	name="Cart" 
-	component={ItemsPreview} 
-	options={{title:'Cart',drawerLabel:'Cart',drawerIcon:({tintColor})=>(
-		<Icon name='cart' type='material-community' size={26} color={tintColor}  />)}}
+	component={TabComponent} 
+	options={{title:'Cart',drawerLabel:'Cart',headerShown:false,drawerIcon:({tintColor,navigation})=>(
+		<Icon name='cart' type='material-community' size={26} color={colors.text}  onPress={()=>navigation.navigate('Cart')}/>)}}
 	 />
+	 <Drawer.Screen 
+	name="Settings" 
+	component={Settings} 
+	options={{title:'Settings',drawerLabel:'Settings',headerTitleStyle:{color:'white',fontSize:22},headerTintColor:'white',drawerIcon:({tintColor})=>(
+		<Icon name='app-settings-alt' type='material-icons' size={28} color={colors.text}  />)}}
+	 /> 
 	</Drawer.Navigator>
 	
 		);
@@ -110,6 +134,9 @@ const mapStateToProps=createStructuredSelector({
 	currentUser:selectCurrentUser
 });
 
+const mapDispatchToProps=dispatch=>({
+   signOutStart:()=>dispatch(signOutStart())
+});
+ 
 
-
-export default connect(mapStateToProps,null)(MainNavigator);
+export default connect(mapStateToProps,mapDispatchToProps)(MainNavigator);

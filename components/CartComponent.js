@@ -17,6 +17,7 @@ import AppleStyleSwipeableRow from './Swipeable';
 import { Icon,Button,ButtonGroup } from 'react-native-elements';
 import { addItem,removeItem,clearItemFromCart,clearCart} from '../redux/cart/cart.actions';
 import { withNavigation } from '@react-navigation/compat';
+import { useTheme } from '@react-navigation/native';
 
 const ButtonGroups=(props)=>{
   const {TotalCartItems,ToTalCartCost,clearCart,navigation}=props;
@@ -71,8 +72,9 @@ const ButtonGroups=(props)=>{
 
 const Row = ({ item,addItem,removeItem}) =>{
     const {id,imageUrl,name,price,quantity}=item;
+    const {colors}=useTheme();
  return(
-  <RectButton key={item.id} style={styles.rectButton} >
+  <RectButton key={item.id} style={[styles.rectButton,{backgroundColor:colors.background}]} >
   <View style={styles.alignment}>
   <View>
   <Image
@@ -82,8 +84,8 @@ const Row = ({ item,addItem,removeItem}) =>{
   />
   </View>
   <View>
-  <Text style={styles.fromText}>{item.name}</Text>
-  <Text numberOfLines={2} style={styles.messageText}>
+  <Text style={[styles.fromText,{color:colors.text}]}>{item.name}</Text>
+  <Text numberOfLines={2} style={[styles.messageText,{color:colors.text}]}>
   Price:  &#x20B9;{item.price}
   </Text>
    <Button
@@ -98,7 +100,7 @@ const Row = ({ item,addItem,removeItem}) =>{
   onPress={()=>removeItem(item)}
   containerStyle={{width:'11%',borderBottomLeftRadius:25,borderTopLeftRadius:25,marginLeft:230,marginTop:6,position:'absolute'}}
   />
-  <Text style={styles.dateText}>
+  <Text style={[styles.dateText,{color:colors.text}]}>
       {item.quantity}
   </Text>
   <Button
