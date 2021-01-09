@@ -17,6 +17,7 @@ import { SafeAreaProvider,SafeAreaView} from 'react-native-safe-area-context';
 import NetInfo from '@react-native-community/netinfo';
 import { useTheme } from '@react-navigation/native';
 import {ThemeManagerContext} from './components/authContext/AuthContext';
+import SplashScreen from 'react-native-splash-screen';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const AppStack=createStackNavigator();
@@ -65,7 +66,7 @@ const App=(props) => {
     }
   }
   useEffect(()=>{
-
+    SplashScreen.hide();
     AsyncStorage.getItem('alreadyLaunched').then(value=>{
       if(value===null){
     AsyncStorage.setItem('alreadyLaunched','true');
@@ -88,7 +89,7 @@ const App=(props) => {
 
         });
         window.value=NetInfo.addEventListener(connectionChange=>handleConnectivityChange(connectionChange));
-    });
+    },[]);
 
   },[isFirstLaunch,window.value]);
   if(isFirstLaunch===null){

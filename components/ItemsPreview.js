@@ -15,23 +15,26 @@ import { Icon,Card,Button} from 'react-native-elements';
 import { addItem } from '../redux/cart/cart.actions';
 import { useTheme } from '@react-navigation/native';
 import { withNavigation } from '@react-navigation/compat';
+import {selectCartItems} from '../redux/cart/cart.selectors';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 
-const ItemsPreview=({navigation,collections,addItem,...props})=>{
+const ItemsPreview=({navigation,collections,addItem,cartItems,...props})=>{
     const {colors,dark}=useTheme();
     const titleName=props.route.params.title;
+
     return(
       
       <View style={styles.collection}>
       <ScrollView>
       {
         collections.filter(({id,title,routeName,items})=>titleName===routeName?{id,title,routeName,items}:null).map(({id,items,title})=>(
-
+        
          <View key={id} style={styles.container}>
           {
+
             items.map(({id,imageUrl,name,price}) => {
               return (
                 <TouchableHighlight
@@ -82,7 +85,8 @@ const ItemsPreview=({navigation,collections,addItem,...props})=>{
 
 
 const mapStateToProps=createStructuredSelector({
-	collections:selectCollectionsForPreview   
+	collections:selectCollectionsForPreview ,
+  cartItems:selectCartItems  
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -38,7 +38,7 @@ const HomeNavigator=()=>(
     <Stack.Screen name="Collections" options={({route})=>({
        title:route.params.title.toUpperCase()
     })} component={ItemsPreview} />
-    <Stack.Screen name="Item" component={ItemView} />
+    <Stack.Screen name="Item" component={ItemView} options={{headerShown:false}} />
     </Stack.Navigator>
     
     );
