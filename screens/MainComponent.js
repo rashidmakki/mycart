@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import TabComponent from './TabComponent';
 import ItemsPreview from '../components/ItemsPreview';
-import Settings from '../components/Settings';
 import AccordionView from '../components/DrawerCollapse';
+import {CartNavigator} from './TabComponent';
+import {SettingsNavigator} from './TabComponent';
 import { NavigationContainer } from '@react-navigation/native';
 import {createDrawerNavigator,DrawerItem,DrawerItemList,DrawerContentScrollView} from '@react-navigation/drawer';
 import  {SafeAreaView } from 'react-native-safe-area-context';
@@ -90,14 +91,14 @@ const MainNavigator=({signOutStart,...props})=>{
 	/>
 	 <Drawer.Screen 
 	name="Cart" 
-	component={TabComponent} 
+	component={CartNavigator} 
 	options={{title:'Cart',drawerLabel:'Cart',headerShown:false,drawerIcon:({tintColor,navigation})=>(
 		<Icon name='cart' type='material-community' size={26} color={colors.text}  onPress={()=>navigation.navigate('Cart')}/>)}}
 	 />
 	 <Drawer.Screen 
 	name="Settings" 
-	component={Settings} 
-	options={{title:'Settings',drawerLabel:'Settings',headerTitleStyle:{color:'white',fontSize:22},headerTintColor:'white',drawerIcon:({tintColor})=>(
+	component={SettingsNavigator} 
+	options={{title:'Settings',drawerLabel:'Settings',headerShown:false,headerTitleStyle:{color:'white',fontSize:22},headerTintColor:'white',drawerIcon:({tintColor})=>(
 		<Icon name='app-settings-alt' type='material-icons' size={28} color={colors.text}  />)}}
 	 /> 
 	</Drawer.Navigator>

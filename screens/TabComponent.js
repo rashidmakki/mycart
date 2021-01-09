@@ -10,6 +10,7 @@ import StripeCheckoutButton from '../components/StripeButton';
 import Success from '../components/Success.js';
 import CategoriesComponent from '../components/CategoriesComponent';
 import CartComponent from '../components/CartComponent';
+import Settings from '../components/Settings';
 import {  SafeAreaView } from 'react-native-safe-area-context';
 import {createStackNavigator} from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
@@ -43,7 +44,7 @@ const HomeNavigator=()=>(
     
     );
 
-const CartNavigator=()=>(
+export const CartNavigator=()=>(
        <Stack.Navigator 
        initialRouteName='Cart' 
         screenOptions={{
@@ -83,7 +84,27 @@ const CategoriesNavigator=()=>(
     })} component={ItemsPreview} />
     
     </Stack.Navigator>
-  )
+  );
+
+export const SettingsNavigator=()=>{
+  return(
+    <Stack.Navigator 
+       initialRouteName='Settings' 
+        screenOptions={{
+       headerStyle:{
+        backgroundColor:'#1976d2'
+      },
+      headerTintColor:'#fff',
+      headerTitleStyle:{
+        color:'#fff'
+      },
+    }}>
+    <Stack.Screen name="Settings" component={Settings} options={({navigation})=>({
+      headerLeft:()=>(<Icon name='menu' size={36} color='white' onPress={()=>navigation.toggleDrawer()} />)
+    }) }/>
+    </Stack.Navigator>
+    );
+}
 
 const MyTabs=()=>{
   const {colors,dark}=useTheme();

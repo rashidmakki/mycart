@@ -5,10 +5,10 @@ import {selectCartItems,selectCartItemsCount,selectCartTotal} from '../redux/car
 import {
   StyleSheet,
   View,
- Animated,
- I18nManager,
- Image,
- TouchableOpacity
+  Animated,
+  I18nManager,
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import { Text } from 'react-native-elements';
 import {  SafeAreaView } from 'react-native-safe-area-context';
@@ -62,7 +62,7 @@ const ButtonGroups=(props)=>{
       disabledStyle={{backgroundColor:'#ff5722'}}
       selectedTextStyle={{color:'white'}}
       selectedButtonStyle={{color:'white'}}
-      containerStyle={{height: 80,width:'100%',zIndex:1,marginLeft:0,position:'absolute',top:615}} 
+      containerStyle={{height: 80,width:'100%',zIndex:1,marginLeft:0,position:'absolute',bottom:0}} 
       />
       );
  
@@ -86,7 +86,7 @@ const Row = ({ item,addItem,removeItem}) =>{
   <View>
   <Text style={[styles.fromText,{color:colors.text}]}>{item.name}</Text>
   <Text numberOfLines={2} style={[styles.messageText,{color:colors.text}]}>
-  Price:  &#x20B9;{item.price}
+  Price:  &#x20B9;{item.price*quantity}
   </Text>
    <Button
   icon={
@@ -130,11 +130,11 @@ const SwipeableRow = ({ item, index,removeItem,clearItem,addItem}) => {
 
 const CartComponent=({cartItems,removeItem,addItem,clearItem,clearCart, TotalCartItems,ToTalCartCost,navigation})=>{
     return(
-      <View>
+      <View style={{minHeight:'94%',width:'100%',bottom:0}}>
        <FlatList
         data={cartItems}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({ item, index }) => (
+        renderItem={({ item, index }) =>(
           <SwipeableRow item={item} index={index} removeItem={removeItem} addItem={addItem} clearItem={clearItem} />
         )}
         keyExtractor={(item, index) => `message ${index}`}

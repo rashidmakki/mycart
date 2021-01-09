@@ -44,7 +44,7 @@ buck-out/
 !debug.keystore
 android/
 ios/
-
+__tests__/
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
