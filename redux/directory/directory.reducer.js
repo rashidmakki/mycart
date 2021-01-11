@@ -31,6 +31,13 @@ const INITIAL_STATE = {
       size: 'large',
       id: 5,
       linkUrl: 'shop/mens'
+    },
+    {
+      title: 'kids',
+      imageUrl:'https://firebasestorage.googleapis.com/v0/b/andoidapp-707b7.appspot.com/o/kids.jpg?alt=media&token=91ca8bd3-1cd9-4771-9f56-f2bb466e7c95',
+      size: 'large',
+      id: 6,
+      linkUrl: 'shop/kids'
     }
   ]
 };

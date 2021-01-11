@@ -16,6 +16,7 @@ import { addItem } from '../redux/cart/cart.actions';
 import { useTheme } from '@react-navigation/native';
 import { withNavigation } from '@react-navigation/compat';
 import {selectCartItems} from '../redux/cart/cart.selectors';
+import * as Animatable from 'react-native-animatable';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
@@ -37,6 +38,7 @@ const ItemsPreview=({navigation,collections,addItem,cartItems,...props})=>{
 
             items.map(({id,imageUrl,name,price}) => {
               return (
+                <Animatable.View key={id} animation={id%2===0?"fadeInRightBig":"fadeInLeftBig"} delay={1000}>
                 <TouchableHighlight
                 key={id}
                 activeOpacity={0.9}
@@ -70,6 +72,7 @@ const ItemsPreview=({navigation,collections,addItem,cartItems,...props})=>{
                 </View>
                  </View>
                  </TouchableHighlight>
+                 </Animatable.View>
                 );
             })    
           }

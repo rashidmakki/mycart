@@ -40,10 +40,10 @@ components/payment/Constants.js
 # BUCK
 buck-out/
 \.buckd/
+android/java_pid6240.hprof
 *.keystore
 !debug.keystore
-android/
-ios/
+*.hprof
 __tests__/
 # fastlane
 #

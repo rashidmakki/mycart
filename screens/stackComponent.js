@@ -11,11 +11,11 @@ import {
   GoogleSignin
 } from '@react-native-community/google-signin';
 import {createStackNavigator} from '@react-navigation/stack';
-import LoginScreen from './LoginComponent';
 import auth from '@react-native-firebase/auth';
 import MainNavigator from './MainComponent';
 import {googleSignInStart} from '../redux/user/user.actions';
 import {googleConfigure} from '../firebase/firebase';
+import LoginScreenEmail from './LoginComponent';
 
 const Stack=createStackNavigator();
 
@@ -59,7 +59,7 @@ class LoginHomeStack extends React.Component{
 				 (isUserLoggedIn)?
 					<MainNavigator/>
                     :
-				    <LoginScreen signIn={this.signIn} />
+				    <LoginScreenEmail signIn={this.signIn} />
 				}
 			   </View>
 				);

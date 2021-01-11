@@ -8,13 +8,14 @@ import {
 } from 'react-native';
 import { Tile } from 'react-native-elements';
 import { withNavigation } from '@react-navigation/compat';
+import * as Animatable from 'react-native-animatable';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 const CollectionOverViewComponent=({title,imageUrl,navigation})=>{
   return(
-   <View style={styles.container}>
+   <Animatable.View animation="zoomIn" duration={2000} delay={1000} style={styles.container}>
    <Tile
    imageSrc={{uri:imageUrl}}
    title={title.toUpperCase()}
@@ -25,7 +26,7 @@ const CollectionOverViewComponent=({title,imageUrl,navigation})=>{
    titleStyle={{fontSize:28}}
    onPress={()=>navigation.navigate('Collections',{title:title})}
    />
-   </View>
+   </Animatable.View>
   	);
 }
 

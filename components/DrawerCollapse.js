@@ -89,6 +89,14 @@ class AccordionView extends Component{
         onPress={()=>navigation.navigate('Collections',{title:'womens'})}
         />
         </TouchableOpacity> 
+        <TouchableOpacity>
+        <Button 
+        type="outline"
+        title="Kids"
+        titleStyle={{color:colors.text,padding:5,fontSize:17,left:-65}}
+        onPress={()=>navigation.navigate('Collections',{title:'kids'})}
+        />
+        </TouchableOpacity> 
          
          </View>
          ):null

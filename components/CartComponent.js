@@ -18,6 +18,7 @@ import { Icon,Button,ButtonGroup } from 'react-native-elements';
 import { addItem,removeItem,clearItemFromCart,clearCart} from '../redux/cart/cart.actions';
 import { withNavigation } from '@react-navigation/compat';
 import { useTheme } from '@react-navigation/native';
+import * as Animatable from 'react-native-animatable';
 
 const ButtonGroups=(props)=>{
   const {TotalCartItems,ToTalCartCost,clearCart,navigation}=props;
@@ -26,15 +27,17 @@ const ButtonGroups=(props)=>{
     setSelectedIndex(selectedIndex);
    }
    const component1 =() =>(
-    <View>
+    <Animatable.View animation="bounceInLeft" delay={1000}>
     <TouchableOpacity
       onPress={() => clearCart()}>
     <Text h4>Clear All</Text>
     <Text> Items: {TotalCartItems} </Text>
     </TouchableOpacity>
-    </View>
+   </Animatable.View>
+    
     );
    const component2 = () =>(
+     <Animatable.View animation="bounceInRight" delay={1000}>
      <TouchableOpacity
       onPress={()=>navigation.navigate('Checkout',{price:ToTalCartCost,totalItems:TotalCartItems})}
       activeOpacity={0.6}>
@@ -50,6 +53,7 @@ const ButtonGroups=(props)=>{
     />
     <Text> Total: &#x20B9;{ToTalCartCost}</Text>
     </TouchableOpacity>
+     </Animatable.View>
  
     );
     const buttons = [{ element:component1 }, { element: component2 }]
@@ -74,6 +78,7 @@ const Row = ({ item,addItem,removeItem}) =>{
     const {id,imageUrl,name,price,quantity}=item;
     const {colors}=useTheme();
  return(
+  <Animatable.View animation="lightSpeedIn" duration={1000} delay={1000}>
   <RectButton key={item.id} style={[styles.rectButton,{backgroundColor:colors.background}]} >
   <View style={styles.alignment}>
   <View>
@@ -117,6 +122,7 @@ const Row = ({ item,addItem,removeItem}) =>{
   </View>
   </View>
   </RectButton>
+  </Animatable.View>
   );
 }
 
@@ -140,7 +146,10 @@ const CartComponent=({cartItems,removeItem,addItem,clearItem,clearCart, TotalCar
         keyExtractor={(item, index) => `message ${index}`}
       />
       {
-        (TotalCartItems!==0)? <ButtonGroups ToTalCartCost={ToTalCartCost} TotalCartItems={TotalCartItems} clearCart={clearCart} navigation={navigation}/>:null
+        (TotalCartItems!==0)? 
+        
+        <ButtonGroups ToTalCartCost={ToTalCartCost} TotalCartItems={TotalCartItems} clearCart={clearCart} navigation={navigation}/>
+        :null
       }  
       </View>
         );

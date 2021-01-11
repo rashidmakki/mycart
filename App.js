@@ -43,84 +43,78 @@ export const CustomDarkTheme = {
 };
 
 
-
 const App=(props) => {
-   const {isDark}=useContext(ThemeManagerContext);
-  const [isFirstLaunch,setIsFirstLaunch]=React.useState(null);
+ const {isDark}=useContext(ThemeManagerContext);
+ const [isFirstLaunch,setIsFirstLaunch]=React.useState(true);
  const  handleConnectivityChange=(connectionInfo)=>{
-    switch(connectionInfo.type){
-      case 'none':
-               return ToastAndroid.show('You are now offline!',ToastAndroid.LONG);
-               break;
-      case 'wifi':
-               return ToastAndroid.show('You are now connected to wifi',ToastAndroid.LONG);
-               break;
-      case 'cellular':
-               return ToastAndroid.show('You are now conneted to cellular',ToastAndroid.LONG);
-               break;
-      case 'unknown':
-               return ToastAndroid.show('You are now have an unknown connection',ToastAndroid.LONG);
-               break;
-      default:
-          break;
-    }
+  switch(connectionInfo.type){
+    case 'none':
+    return ToastAndroid.show('You are now offline!',ToastAndroid.LONG);
+    break;
+    case 'wifi':
+    return ToastAndroid.show('You are now connected to wifi',ToastAndroid.LONG);
+    break;
+    case 'cellular':
+    return ToastAndroid.show('You are now conneted to cellular',ToastAndroid.LONG);
+    break;
+    case 'unknown':
+    return ToastAndroid.show('You are now have an unknown connection',ToastAndroid.LONG);
+    break;
+    default:
+    break;
   }
+}
   useEffect(()=>{
     SplashScreen.hide();
     AsyncStorage.getItem('alreadyLaunched').then(value=>{
       if(value===null){
-    AsyncStorage.setItem('alreadyLaunched','true');
+        AsyncStorage.setItem('alreadyLaunched','true');
         setIsFirstLaunch(true);
       }else{
         setIsFirstLaunch(false);
       }
-
+     });
       NetInfo.fetch()
-        .then((connectionInfo)=>{
-          if(connectionInfo.type==='cellular'){
-            ToastAndroid.show('Intial Network Connectivity Type:'
+      .then((connectionInfo)=>{
+        if(connectionInfo.type==='cellular'){
+          ToastAndroid.show('Intial Network Connectivity Type:'
             + connectionInfo.type+', Connection:'+ connectionInfo.isConnected+', Carrier :'+connectionInfo.details.carrier,
             ToastAndroid.LONG)
-          }else{
-             ToastAndroid.show('Intial Network Connectivity Type:'
-            + connectionInfo.type+', Connection:'+ connectionInfo.isConnected+', Strength :'+connectionInfo.details.strength,
-            ToastAndroid.LONG)
-          }
-
-        });
-        window.value=NetInfo.addEventListener(connectionChange=>handleConnectivityChange(connectionChange));
-    },[]);
-
+        }else{
+         ToastAndroid.show('Intial Network Connectivity Type:'
+          + connectionInfo.type+', Connection:'+ connectionInfo.isConnected+', Strength :'+connectionInfo.details.strength,
+          ToastAndroid.LONG)
+       }
+     });
+      window.value=NetInfo.addEventListener(connectionChange=>handleConnectivityChange(connectionChange));
   },[isFirstLaunch,window.value]);
+
   if(isFirstLaunch===null){
     return null;
-  }else if(isFirstLaunch===true){
+  }else{
     return (
     <SafeAreaProvider>
     <StatusBar backgroundColor="#004ba0" barStyle="light-content" style={styles.statusBar}/>
     <NavigationContainer theme={isDark?CustomDarkTheme:CustomDefaultTheme}>
-      <AppStack.Navigator
-          headerMode="none"
-        >
-      <AppStack.Screen name="Onboarding" component={OnboardingScreen} />
-      <AppStack.Screen name="Login" component={LoginHomeStack} />
-      </AppStack.Navigator>
+        {
+          (isFirstLaunch===true)?(
+            <AppStack.Navigator
+            headerMode="none"
+            >
+            <AppStack.Screen name="Onboarding" component={OnboardingScreen} />
+            <AppStack.Screen name="Login" component={LoginHomeStack} />
+            </AppStack.Navigator>
+            ):(
+            <AppStack.Navigator
+            headerMode="none"
+            >
+            <AppStack.Screen name="Login" component={LoginHomeStack} />
+            </AppStack.Navigator>
+            )
+          }
     </NavigationContainer>
     </SafeAreaProvider>
       );
-  }else{
-    return (
-    <SafeAreaProvider>
-    <StatusBar backgroundColor="#004ba0" barStyle="light-content" style={styles.statusBar} />
-    <NavigationContainer theme={isDark?CustomDarkTheme:CustomDefaultTheme}>
-      <AppStack.Navigator
-          headerMode="none"
-        >
-        <AppStack.Screen name="Login" component={LoginHomeStack} />
-      </AppStack.Navigator>
-    </NavigationContainer>
-    </SafeAreaProvider>
-    );
   }
   
 };
