@@ -1,6 +1,8 @@
 # mycart
 a shopping app integrated with firebase , redux for state management and stripe api for payment..
 
+![mycart-logo](https://raw.githubusercontent.com/rashidmakki/mycart/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?token=AMSZNML6ZPHGEG5HYJ6QWFLAA2POY)
+
 ## To run this app successfully please follow the steps:
 ##### This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
 ##### To run this app on `Ios` configures all the packages given in step 2.
@@ -54,7 +56,7 @@ If You are new then signup on Firebase to get the webClientId.
  
  If you are familiar with backend then provide your endpoint where you want to send your data and then get the response.
  ```js
-  fetch(`YOUR ENDPOINT HERE`,{    //example https://mycart.com/checkout
+  fetch(`YOUR ENDPOINT HERE`,{    //example https://www.mycart.com/checkout
   method:'POST',
   headers:{
     'Content-Type':'application/json',
