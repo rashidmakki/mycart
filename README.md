@@ -14,6 +14,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
 <img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-53-12-965_com.miui.gallery.jpg?raw=true" width="300" height="600" />
 <img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-39-55-190_com.miui.gallery.jpg?raw=true" width="300" height="600" />
 <img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-40-06-667_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-40-53-904_com.miui.gallery.jpg?raw=true" width="300" height="600"/>
 </p>
 
 ## To run this app successfully please follow the steps:
