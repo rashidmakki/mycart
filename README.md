@@ -6,7 +6,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
 ##### To run this app on `Ios` configures all the packages given in step 2.
 
 ## Step 1:
-    `git clone https://github.com/rashidmakki/mycart.git`
+    git clone https://github.com/rashidmakki/mycart.git
    
 ## Step 2 :
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
@@ -28,7 +28,8 @@ a shopping app integrated with firebase , redux for state management and stripe 
 *Note: If you have installed all the above packages and configured it on the both `Android` and `Ios` then you are free to use app on both the platform.*
 
 ## Step 3:
-place you webClientId at `./screens/stackComponent.js`.You can find your webClientId at firebase in Authentication Section.
+Place you webClientId at `./screens/stackComponent.js`.You can find your webClientId at [firebase](https://firebase.google.com/) in Authentication Section.
+If You are new then signup on Firebase to get the webClientId. 
 
 ```js
    async componentDidMount() {
@@ -38,6 +39,15 @@ place you webClientId at `./screens/stackComponent.js`.You can find your webClie
          forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
          accountName: '', // [Android] specifies an account name on the device that should be used
      });
-	  } 
+   } 
+ ```
+ ## Step 4:
+ Place Your Publishable Key at `./components/stripeButton.js`.You can find your Publishable Key at [Stripe](https://stripe.com).If You are new then signup on     Stripe to get the Publishable Key. 
+ 
+ ```js
+    await Stripe.setOptionsAsync({
+    publishableKey: 'Your Publishable Key' //  Your key
+  });
  ```
  
+  
