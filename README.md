@@ -1,7 +1,7 @@
 # mycart
-a shopping app integrated with firebase , redux for state management and stripe api for payment..
+a shopping app integrated with firebase , redux for state management and stripe api for payment.
 
-![mycart-logo](https://raw.githubusercontent.com/rashidmakki/mycart/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?token=AMSZNML6ZPHGEG5HYJ6QWFLAA2POY)
+<img src="https://raw.githubusercontent.com/rashidmakki/mycart/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?token=AMSZNML6ZPHGEG5HYJ6QWFLAA2POY" width="200" height="400" />
 
 ## To run this app successfully please follow the steps:
 ##### This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
