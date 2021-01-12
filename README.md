@@ -10,7 +10,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
    
 ## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
-###### Already Configured for `Android`.Only download your `google-services.json` file from firebase and place it at `android/app/` .
+###### Already Configured for `Android`.Only download your `google-services.json` file from [firebase](firebase.google.com) and place it at `android/app/` .
 ###### For `Ios` you have to configure it on your own for now.
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
@@ -51,6 +51,7 @@ If You are new then signup on Firebase to get the webClientId.
  ```
  ## Step 5:
  To make a transaction successful you have to create you server and with the help of [stripe api ](https://stripe.com/docs/api) we can make transaction which will be shown on your stripe account once it is successfull or failed.
+ 
  If you are familiar with backend then provide your endpoint where you want to send your data and then get the response.
  ```js
   fetch(`YOUR ENDPOINT HERE`,{    //example https://mycart.com/checkout
@@ -63,3 +64,12 @@ If You are new then signup on Firebase to get the webClientId.
 })
 ```
 If you are new to backend and nodeJs then clone the repo [mycart-api](https://github.com/rashidmakki/mycart-api.git) and follow the few steps shown there. 
+
+## Step 6:
+Download the react-native-cli : `npm i react-native-cli` if you haven't.
+##### Run the following command from the root folder of your app in the terminal:
+   `npm install`
+   `react-native run-android`
+  on another terminal:  `react-native start`
+
+*Note:if you are facing issue regarding adb devices or Android SDK, Android SDK Platform, Android Virtual Device that is because you haven't set up [Android Development Environment](https://reactnative.dev/docs/environment-setup)properly.You can also refer to stackoverflow if you are facing issues.*
