@@ -1,9 +1,19 @@
 # mycart
 a shopping app integrated with firebase , redux for state management and stripe api for payment.
 <p float="left">
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?raw=true" width="200" height="300" />
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-32-44-608_com.miui.gallery.jpg?raw=true" width="200" height="300" />
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-33-10-500_com.miui.gallery.jpg?raw=true" width="200" height="300" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-32-44-608_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-33-10-500_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-35-34-870_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-35-50-253_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-36-51-015_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-37-38-535_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-37-58-724_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-38-32-536_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-38-10-701_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-53-12-965_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-39-55-190_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-40-06-667_com.miui.gallery.jpg?raw=true" width="300" height="600" />
 </p>
 
 ## To run this app successfully please follow the steps:
