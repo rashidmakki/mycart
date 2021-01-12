@@ -8,7 +8,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
 ## Step 1:
     git clone https://github.com/rashidmakki/mycart.git
    
-## Step 2 :
+## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
 ###### Already Configured for `Android`.Only download your `google-services.json` file from firebase and place it at `android/app/` .
 ###### For `Ios` you have to configure it on your own for now.
@@ -49,5 +49,17 @@ If You are new then signup on Firebase to get the webClientId.
     publishableKey: 'Your Publishable Key' //  Your key
   });
  ```
- 
-  
+ ## Step 5:
+ To make a transaction successful you have to create you server and with the help of [stripe api ](https://stripe.com/docs/api) we can make transaction which will be shown on your stripe account once it is successfull or failed.
+ If you are familiar with backend then provide your endpoint where you want to send your data and then get the response.
+ ```js
+  fetch(`YOUR ENDPOINT HERE`,{    //example https://mycart.com/checkout
+  method:'POST',
+  headers:{
+    'Content-Type':'application/json',
+    'Accept':'application/json'
+  },
+  body:JSON.stringify(body)
+})
+```
+If you are new to backend and nodeJs then clone the repo [mycart-api](https://github.com/rashidmakki/mycart-api.git) and follow the few steps shown there. 
