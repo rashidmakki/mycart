@@ -6,11 +6,11 @@ import {
 } from 'react-native';
 
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout,Toggle } from '@ui-kitten/components';
+import { ApplicationProvider as KittenApplicationProvider, Layout,Toggle } from '@ui-kitten/components';
 import {ThemeManagerContext} from './authContext/AuthContext';
 import { useTheme } from '@react-navigation/native';
 
-const Settings= () => {
+const SettingsComponent= () => {
   const {colors}=useTheme();
 
  const {isDark,toggleTheme}=React.useContext(ThemeManagerContext);
@@ -42,11 +42,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => {
+const Settings=() => {
   const {isDark}=React.useContext(ThemeManagerContext);
   return (
-  <ApplicationProvider {...eva} theme={isDark?eva.dark:eva.light}>
-  <Settings />
-  </ApplicationProvider>
+  <KittenApplicationProvider {...eva} theme={isDark?eva.dark:eva.light}>
+  <SettingsComponent />
+  </KittenApplicationProvider>
   );
 };
+
+export default Settings;
