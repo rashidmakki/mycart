@@ -1,11 +1,10 @@
 # mycart
 a shopping app integrated with firebase , redux for state management and stripe api for payment.
-
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?raw=true" width="300" height="400" />
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-32-44-608_com.miui.gallery.jpg?raw=true" width="300" height="400" />
-<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-33-10-500_com.miui.gallery.jpg?raw=true" width="300" height="400" />
-<br />
-
+<p float="left">
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-32-44-608_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+<img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-33-10-500_com.miui.gallery.jpg?raw=true" width="300" height="600" />
+</p>
 
 ## To run this app successfully please follow the steps:
 ##### This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
