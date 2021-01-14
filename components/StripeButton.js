@@ -302,7 +302,7 @@ const ButtonSubmit=()=>{
 const checkoutSessionIdFetch=async ()=>{
   if(number!==''&&cvc!==''&&expiry!==''&&FirstName!==''&&City!==''&&State!==''&&Country!==''&&PostalCode!==''){
     await Stripe.setOptionsAsync({
-    publishableKey: 'pk_test_51H2a4YBFNahoJiBBTQDQ3guYdvsLv74Nyxj0BWDvMc24EG2MDnHfJJjMRG3TWpWcd7dPiatNP1qwq8jL0ig0e9mo00HZg33sxx' //  Your key
+    publishableKey: 'YOUR PUBLISHABLE KEY' //  Your key
   });
     const params = {
   // mandatory
@@ -328,7 +328,7 @@ const body={
   totalPrice,
   Email
 }
-fetch(`https://frozen-badlands-23496.herokuapp.com/checkout`,{
+fetch(`YOUR ENDPOINT`,{
   method:'POST',
   headers:{
     'Content-Type':'application/json',
