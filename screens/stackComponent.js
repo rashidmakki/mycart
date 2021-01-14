@@ -27,7 +27,7 @@ class LoginHomeStack extends React.Component{
   
 	  async componentDidMount() {
 	    await GoogleSignin.configure({
-         webClientId:'77084579600-b4cb4aodqquf65qpckmnc3ag39djpvhk.apps.googleusercontent.com', // client ID of type WEB for your server(needed to verify user ID and offline access)
+         webClientId:'YOUR CLIENT ID', // client ID of type WEB for your server(needed to verify user ID and offline access)
          offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
          forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
          accountName: '', // [Android] specifies an account name on the device that should be used
