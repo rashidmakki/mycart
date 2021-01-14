@@ -18,6 +18,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
 </p>
 
 ## To run this app successfully please follow the steps:
+##### I have developed this app using react-native cli, haven't used expo cli. 
 ##### This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
 ##### To run this app on `Ios` configures all the packages given in step 2.
 
