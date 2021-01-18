@@ -93,4 +93,4 @@ Download the react-native-cli : `npm i react-native-cli` if you haven't.
 
 Now the `app` is ready to run.Wait till it execute all the files.
 
-*Note:if you are facing issue regarding adb devices or Android SDK, Android SDK Platform, Android Virtual Device that is because you haven't set up [Android Development Environment](https://reactnative.dev/docs/environment-setup) properly.You can also refer to stackoverflow for the same.*
+*Note:If you are facing issue regarding adb devices or Android SDK, Android SDK Platform, Android Virtual Device that is because you haven't set up [Android Development Environment](https://reactnative.dev/docs/environment-setup) properly.You can also refer to stackoverflow for the same.*
