@@ -28,7 +28,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
 ## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
 ###### Already Configured for `Android`.Only download your `google-services.json` file from [firebase](firebase.google.com) and place it at `android/app/` .
-###### For `Ios` you have to configure it on your own for now.
+###### For `IOS` you have to configure it on your own for now.
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
 ###### Already Configured for `Android`.
