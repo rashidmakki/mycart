@@ -1,5 +1,5 @@
 # mycart
-a shopping app integrated with firebase , redux for state management and stripe api for payment.
+a react-native shopping app integrated with firebase , redux for state management and stripe api for payment.
 <p float="left">
 <img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-31-59-173_com.miui.gallery.jpg?raw=true" width="300" height="600" />
 <img src="https://github.com/rashidmakki/mycart/blob/main/screenshots/Screenshot_2021-01-11-15-32-44-608_com.miui.gallery.jpg?raw=true" width="300" height="600" />
@@ -27,7 +27,7 @@ a shopping app integrated with firebase , redux for state management and stripe 
    
 ## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
-###### Already Configured for `Android`.Only download your `google-services.json` file from [firebase](firebase.google.com) and place it at `android/app/` .
+###### Already Configured for `Android`.Only download your `google-services.json` file after creating a new Android Project from [firebase](firebase.google.com) and place it at `android/app/` .
 ###### For `IOS` you have to configure it on your own for now.
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
