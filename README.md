@@ -32,7 +32,7 @@ a react-native shopping app integrated with firebase , redux for state managemen
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
 ###### Already Configured for `Android`.
-###### For `Ios` you have to configure it on your own for now.
+###### For `IOS` you have to configure it on your own for now.
 
 #### [Installation of react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 ###### Already Configured for `Android`.
