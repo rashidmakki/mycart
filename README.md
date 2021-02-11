@@ -36,7 +36,7 @@ a react-native shopping app integrated with firebase , redux for state managemen
 
 #### [Installation of react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
 ###### Already Configured for `Android`.
-###### For `Ios` you have to configure it on your own for now.
+###### For `IOS` you have to configure it on your own for now.
 
 #### [Expo-stripe-Payment](https://docs.expo.io/versions/latest/sdk/payments/)
 ###### Already Configured for `Android`.
