@@ -40,7 +40,7 @@ a react-native shopping app integrated with firebase , redux for state managemen
 
 #### [Expo-stripe-Payment](https://docs.expo.io/versions/latest/sdk/payments/)
 ###### Already Configured for `Android`.
-###### For `Ios` you have to configure it on your own for now.
+###### For `IOS` you have to configure it on your own for now.
 
 *Note: If you have installed all the above packages and configured it on the both `Android` and `Ios` then you are free to use app on both the platform.*
 
