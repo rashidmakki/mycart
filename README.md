@@ -18,29 +18,29 @@ a react-native shopping app integrated with firebase , redux for state managemen
 </p>
 
 ## To run this app successfully please follow the steps:
-##### I have developed this app using react-native cli, haven't used expo cli. 
-##### This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
-##### To run this app on `IOS` configures all the packages given in step 2.
+ I have developed this app using react-native cli, haven't used expo cli. 
+ This app can only run on `Android` for now as `firebase Integration` ,`unimodules Installation` and `configuration of react-native-splash-screen` has not been done on `IOS` yet.
+ To run this app on `IOS` configures all the packages given in step 2.
 
 ## Step 1:
     git clone https://github.com/rashidmakki/mycart.git
    
 ## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
-###### Already Configured for `Android`.Only download your `google-services.json` file after creating a new Android Project from [firebase](firebase.google.com) and place it at `android/app/` .
-###### For `IOS` you have to configure it on your own for now.
+ Already Configured for `Android`.Only download your `google-services.json` file after creating a new Android Project from [firebase](firebase.google.com) and place it at `android/app/` .
+ For `IOS` you have to configure it on your own for now.
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
-###### Already Configured for `Android`.
-###### For `IOS` you have to configure it on your own for now.
+ Already Configured for `Android`.
+ For `IOS` you have to configure it on your own for now.
 
 #### [Installation of react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
-###### Already Configured for `Android`.
-###### For `IOS` you have to configure it on your own for now.
+ Already Configured for `Android`.
+ For `IOS` you have to configure it on your own for now.
 
 #### [Expo-stripe-Payment](https://docs.expo.io/versions/latest/sdk/payments/)
-###### Already Configured for `Android`.
-###### For `IOS` you have to configure it on your own for now.
+ Already Configured for `Android`.
+ For `IOS` you have to configure it on your own for now.
 
 *Note: If you have installed all the above packages and configured it on the both `Android` and `Ios` then you are free to use app on both the platform.*
 
