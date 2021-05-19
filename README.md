@@ -28,18 +28,22 @@ a react-native shopping app integrated with firebase , redux for state managemen
 ## Step 2:
 #### [Integrate firebase with your app ](https://rnfirebase.io/#installation)
  Already Configured for `Android`.Only download your `google-services.json` file after creating a new Android Project from [firebase](firebase.google.com) and place it at `android/app/` .
+
  For `IOS` you have to configure it on your own for now.
 
 #### [Install Unimodules](https://docs.expo.io/bare/installing-unimodules/) 
  Already Configured for `Android`.
+
  For `IOS` you have to configure it on your own for now.
 
 #### [Installation of react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen)
  Already Configured for `Android`.
+
  For `IOS` you have to configure it on your own for now.
 
 #### [Expo-stripe-Payment](https://docs.expo.io/versions/latest/sdk/payments/)
  Already Configured for `Android`.
+
  For `IOS` you have to configure it on your own for now.
 
 *Note: If you have installed all the above packages and configured it on the both `Android` and `Ios` then you are free to use app on both the platform.*
